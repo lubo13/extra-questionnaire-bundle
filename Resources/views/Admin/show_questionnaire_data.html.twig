@@ -1,0 +1,42 @@
+{% extends 'SonataAdminBundle:CRUD:base_show_field.html.twig' %}
+
+{% block field %}
+    {% set questionnaireData = object.questionnaireData %}
+    {% if questionnaireData['title'] is defined %}
+        <tr>
+            <th colspan="7" class="text-center">
+                {{ questionnaireData['title'] }}
+            </th>
+        </tr>
+    {% endif %}
+
+    <tr>
+        <th class="text-center" colspan="3">
+            {{ 'extra_questions'|trans({}, 'ExtraQuestionnaireBundle') }}
+        </th>
+        <th class="text-center" colspan="4">
+            {{ 'extra_answers'|trans({}, 'ExtraQuestionnaireBundle') }}
+        </th>
+    </tr>
+
+    {% if questionnaireData['questions'] is defined %}
+        {% for question in questionnaireData['questions'] %}
+            {% if question['title'] is defined and question['answers'] is defined %}
+                <tr>
+                    <th colspan="3">
+                        {{ question['title'] }}
+                    </th>
+                    <th colspan="4">
+                        {% for answer in question['answers'] %}
+                            {% if answer['title'] is defined %}
+                                <p class="{% if answer['checked'] %} bg-success {% endif %} text-center table-bordered">
+                                    {{ answer['title'] }}
+                                </p>
+                            {% endif %}
+                        {% endfor %}
+                    </th>
+                </tr>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+{% endblock %}

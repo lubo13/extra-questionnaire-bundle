@@ -1,0 +1,26 @@
+{
+  "name": "extra/questionnaire-bundle",
+  "description": "Questionnaire with dynamic questions and answers managed from sonata admin panel",
+  "type": "symfony-bundle",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Lubo Grozdanov",
+      "email": "grozdanov.lubo@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.1",
+    "symfony/symfony": ">=3.4.0 <4.0.0",
+    "sonata-project/admin-bundle": "^3.54",
+    "ThirdPartyBundle......."
+  },
+  "autoload": {
+    "psr-4": {
+      "Extra\\QuestionnaireBundle\\": ""
+    }
+  },
+  "target-dir": "Extra/QuestionnaireBundle",
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}

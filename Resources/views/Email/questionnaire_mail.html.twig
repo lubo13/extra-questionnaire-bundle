@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Contact Form</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <style>
+        strong, a {
+            color: #2d8aca;
+        }
+
+        a:hover {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body style="font-family: Arial, Helvetica, sans-serif; background: #ededed; text-align: center; color: #444; font-size: 15px;">
+<table cellpadding="20"
+       style="background: #fff; width:600px; text-align: left; margin: 20px auto; border: 1px solid #e6e6e6; border-bottom: 2px solid #e1e1e1; border-collapse: collapse;">
+    <tr>
+        <th colspan="2" class="text-center"
+            style="text-align: center; border-bottom: 1px solid #ededed;">
+            {% if 'StenikLogoBundle'|bundle_exists %}
+                {{ render(controller('StenikLogoBundle:LogoFrontend:getLogoForEmails')) }}
+            {% endif %}
+        </th>
+    </tr>
+    {% if item is defined and item is not null and item|length %}
+        <tr>
+            <td style="width: 25%; border-right: 1px solid #e6e6e6; border-bottom: 1px solid #e6e6e6;">
+                <strong>{{ 'contact.enquiryFor'|trans({}, "messages") }}</strong>
+            </td>
+            <td style="border-bottom: 1px solid #e6e6e6;">
+                {% if path is defined and path is not null and path|length %}
+                    <a href="{{ app.request.getSchemeAndHttpHost() }}{{ path }}">{{ item.title }}</a>
+                {% else %}
+                    {{ item.title }}
+                {% endif %}
+            </td>
+        </tr>
+    {% endif %}
+    {% set questionnaireData = data.questionnaireData %}
+
+    {% if questionnaireData['title'] is defined %}
+        <tr>
+            <td style="width: 25%; border-right: 1px solid #e6e6e6; border-bottom: 1px solid #e6e6e6;" colspan="2">
+                <strong>{{ questionnaireData['title'] }}</strong></td>
+        </tr>
+    {% endif %}
+
+    <tr>
+        <td style="width: 25%; border-right: 1px solid #e6e6e6; border-bottom: 1px solid #e6e6e6;">
+            <strong>
+                {{ 'extra_questions'|trans({}, 'ExtraQuestionnaireBundle') }}
+            </strong>
+        </td>
+        <td style="width: 25%; border-right: 1px solid #e6e6e6; border-bottom: 1px solid #e6e6e6;">
+            <strong>
+                {{ 'extra_answers'|trans({}, 'ExtraQuestionnaireBundle') }}
+            </strong>
+        </td>
+    </tr>
+
+    {% if questionnaireData['questions'] is defined %}
+        {% for question in questionnaireData['questions'] %}
+            {% if question['title'] is defined and question['answers'] is defined %}
+                <tr>
+                    <td style="width: 25%; border-right: 1px solid #e6e6e6; border-bottom: 1px solid #e6e6e6;">
+                        <strong>
+                            {{ question['title'] }}
+                        </strong>
+                    </td>
+                    <td style="width: 25%; border-right: 1px solid #e6e6e6; border-bottom: 1px solid #e6e6e6;">
+                        <strong>
+                            {% for answer in question['answers'] %}
+                                {% if answer['title'] is defined %}
+                                    <p class="text-center table-bordered"
+                                       style="{% if answer['checked'] %} background: #49eb34; {% endif %}">
+                                        {{ answer['title'] }}
+                                    </p>
+                                {% endif %}
+                            {% endfor %}
+                        </strong>
+                    </td>
+                </tr>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
+
+</table>
+<div style="width: 600px; text-align: center; margin: 0 auto;">
+    <p style="font-size: 13px; font-style: italic; ">{{ 'message_generated_from'|trans({}, 'messages') }}
+        <a href="{{ path('homepage') }}">{{ app.request.getSchemeAndHttpHost() }}</a>, {{ 'developed_by'|trans({}, 'messages') }}
+        <a href="http://www.stenikgroup.com/" target="blank">Stenik</a>.</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,36 @@
+services:
+  extra.questionnaire.admin.questionnaire:
+    class: Extra\QuestionnaireBundle\Admin\QuestionnaireAdmin
+    arguments:
+      - ~
+      - Extra\QuestionnaireBundle\Entity\Questionnaire
+      - StenikCoreBundle:SortableCRUD
+    tags:
+      - { name: sonata.admin, manager_type: orm, group: "extra_questionnaire_questionnaires", label: "extra_questionnaires" }
+
+  extra.questionnaire.admin.question:
+    class: Extra\QuestionnaireBundle\Admin\QuestionAdmin
+    arguments:
+      - ~
+      - Extra\QuestionnaireBundle\Entity\Question
+      - ~
+    tags:
+      - { name: sonata.admin, manager_type: orm, group: "extra_questionnaire_questionnaires", label: "extra_questions" }
+
+  extra.questionnaire.admin.answer:
+    class: Extra\QuestionnaireBundle\Admin\AnswerAdmin
+    arguments:
+      - ~
+      - Extra\QuestionnaireBundle\Entity\Answer
+      - ~
+    tags:
+      - { name: sonata.admin, manager_type: orm, group: "extra_questionnaire_questionnaires", label: "extra_answers" }
+
+  extra.questionnaire.admin.completed_questionnaire:
+    class: Extra\QuestionnaireBundle\Admin\CompletedQuestionnaireAdmin
+    arguments:
+      - ~
+      - Extra\QuestionnaireBundle\Entity\CompletedQuestionnaire
+      - ~
+    tags:
+      - { name: sonata.admin, manager_type: orm, group: "extra_questionnaire_questionnaires", label: "extra_completed_questionnaires" }

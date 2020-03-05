@@ -1,0 +1,20 @@
+{% extends 'SonataAdminBundle:CRUD:base_show_field.html.twig' %}
+
+{% block field %}
+    <tr>
+        {% for key, value in object.userData %}
+            <td>{{ key }}</td>
+        {% endfor %}
+    </tr>
+    <tr>
+        {% for value in object.userData %}
+            <td>
+                {% if value is iterable %}
+                    {{ value|join }}
+                {% else %}
+                    {{ value }}
+                {% endif %}
+            </td>
+        {% endfor %}
+    </tr>
+{% endblock %}

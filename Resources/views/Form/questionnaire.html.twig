@@ -1,0 +1,26 @@
+{% if  form.children|length > 1 %}
+    <div class="col colQuestionnaire">
+
+        <span class="title">{{ 'questionnaire.title'|trans({}, "messages") }}</span>
+
+        <div class="form" id="formQuestionnaire">
+
+            {# <p class="question">{{ 'questionnaire.question'|trans({}, "messages") }}</p> #}
+
+            {% for message in app.flashes('success_questionnaire') %}
+                <div class="msg msgSuccess">
+                    {{ message|trans({}, 'ExtraQuestionnaireBundle') }}
+                </div>
+            {% endfor %}
+
+            {{ form_start(form, {'action': path('extra_questionnaire'), 'method': 'POST', 'attr': {'id': 'questionnaire_form', 'novalidate': 'novalidate'}}) }}
+            {{ form_widget(form) }}
+            <div class="btns">
+                <input type="button" id="questionnaireFormSubmitBtn"
+                       class="btnQuestionare"
+                       value="{{ 'questionnaire.button'|trans({}, "messages") }}"/>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endif %}

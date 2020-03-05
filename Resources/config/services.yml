@@ -1,0 +1,2 @@
+services:
+  ThirdPartyBundle\SettingsBundle\Manager\SettingsManager: "@third_party_bundle.settings_manager"
